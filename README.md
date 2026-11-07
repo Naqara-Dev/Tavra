@@ -21,7 +21,19 @@
 </p>
 
 > [!NOTE]
-> **Tavra is new, and there's no download yet.** The gesture logic is tested, and so is the app with a scripted finger. Pressing real volume keys and holding back real clicks needs Accessibility permission, and that hasn't been confirmed on a real Mac yet. For now you [build it yourself](#build).
+> **Tavra is new.** The gesture logic is tested, and so is the app with a scripted finger. Pressing real volume keys and holding back real clicks hasn't been confirmed on a real Mac yet, so please [tell us](https://github.com/Naqara-Dev/Tavra/issues) how it goes. One switch in the menu bar pauses everything.
+
+<p align="center">
+  <a href="https://github.com/Naqara-Dev/Tavra/releases/latest"><b>Download the latest release</b></a>
+</p>
+
+## Install
+
+1. Open the DMG and drag Tavra to Applications.
+2. Open it. It isn't notarized yet, so macOS blocks it the first time: open **System Settings › Privacy & Security** and choose **Open Anyway**.
+3. Check your trackpad, then turn on Tavra under **Accessibility** when it asks.
+
+Tavra doesn't use the network, so it doesn't update itself. New versions are on the [releases page](https://github.com/Naqara-Dev/Tavra/releases).
 
 ## Press, then slide
 
@@ -78,12 +90,13 @@ It reads touches through MultitouchSupport, a private macOS framework, so it can
 
 ## Build
 
-You need Xcode 16 or later, and a code signing certificate so macOS remembers the permission between builds. An Apple Development certificate will do.
+To build it yourself, you need Xcode 16 or later, and a code signing certificate so macOS remembers the permission between builds. An Apple Development certificate will do.
 
 ```sh
 ./scripts/test.sh       # the logic, nothing on the Mac touched
 ./scripts/build.sh      # build/Build/Products/Debug/Tavra.app
 ./scripts/e2e.sh        # the app with a scripted finger, and no real clicks
+./scripts/release.sh    # dist/Tavra-X.dmg, after the tests pass
 ```
 
 Debug builds take `-TavraFake YES`, which sends nothing to the system, with `-TavraDemo YES`, `-TavraCheckDemo 4`, `-TavraPage feel`, `-TavraStep check` and `TAVRA_HOME`.
